@@ -9,18 +9,20 @@ async function fetchTrendingVideos() {
   data.items.forEach(item => {
     const videoTitle = item.snippet.title;
     const videoId = item.id;
-
+    
     const videoBox = document.createElement('div');
-    videoBox.classList.add('video-box');
-    
-    const videoIframe = document.createElement('iframe');
-    videoIframe.src = `https://www.youtube.com/embed/${videoId}`;
-    videoIframe.width = '100%';
-    videoIframe.height = '315';
-    videoIframe.frameBorder = '0';
-    videoIframe.allowFullscreen = true;
-    
-    videoBox.appendChild(videoIframe);
+    videoBox.className = 'video-box';
+
+    const videoTitleElement = document.createElement('div');
+    videoTitleElement.className = 'video-title';
+    videoTitleElement.textContent = videoTitle;
+    videoBox.appendChild(videoTitleElement);
+
+    const videoPreview = document.createElement('iframe');
+    videoPreview.src = `https://www.youtube.com/embed/${videoId}`;
+    videoPreview.className = 'video-preview';
+    videoPreview.allowFullscreen = true;
+    videoBox.appendChild(videoPreview);
     
     videoContainer.appendChild(videoBox);
   });
