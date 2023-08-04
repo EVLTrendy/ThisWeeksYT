@@ -3,7 +3,10 @@ const apiKey = 'AIzaSyAfq3GCaHig-hg5L1emI5JnbkOGkZiXDiI'; // Replace with your a
 const videoContainer = document.getElementById('videos');
 
 async function fetchTrendingVideos() {
-  const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=10&key=${apiKey}`);
+  const excludedCategories = ['10', '17', '20']; // Music, Sports, Gaming
+  const excludedCategoryString = excludedCategories.join(',');
+
+  const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=10&key=${apiKey}&videoCategoryId=${excludedCategoryString}`);
   const data = await response.json();
   
   data.items.forEach(item => {
